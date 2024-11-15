@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:univents/screens/dashboard.dart';
 import 'package:univents/screens/login.dart';
 
 void main() {
@@ -12,7 +13,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {'/': (context) => const LoginPage()},
+      routes: {
+        '/': (context) => const LoginPage(),
+        '/home': (context) => const Dashboard()
+      },
     );
   }
 }

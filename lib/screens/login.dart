@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:univents/screens/dashboard.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -8,6 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Color primary = Color.fromARGB(255, 8, 100, 175);
     return Scaffold(
         body: Center(
       child: Container(
@@ -31,25 +34,114 @@ class LoginPage extends StatelessWidget {
               width: size.width,
               decoration:
                   BoxDecoration(border: Border.all(color: Colors.black)),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "Logo",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.network(
+                        "https://www.addu.edu.ph/wp-content/uploads/2020/08/UniversitySealWhite-1024x1020.png",
+                        height: 80,
+                      ),
+                      SizedBox(width: 20),
+                      const Text(
+                        "UNIVENTS",
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.white,
+                          letterSpacing: -1,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
                   ),
-                  Text(
+                  SizedBox(height: 40),
+                  const Text(
                     "Login",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         fontSize: 40),
                   ),
-                  Text("Email"),
-                  Text("Password"),
-                  Text("Submit")
+                  SizedBox(height: 40),
+                  InputText("Email"),
+                  InputText("Password", true),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text("Forgot your Password?",
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10,
+                        )),
+                  ),
+                  const SizedBox(height: 20),
+                  MaterialButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const Dashboard()));
+                    },
+                    color: primary,
+                    minWidth: double.infinity,
+                    elevation: 10,
+                    padding: const EdgeInsets.all(15),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    child: const Text(
+                      "Sign in",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/signup');
+                      },
+                      child: const Text(
+                        "Create new account",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.bold),
+                      )),
+                  const SizedBox(height: 35),
+                  const Text(
+                    "or continue with",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                  MaterialButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const Dashboard()));
+                    },
+                    color: Colors.white,
+                    minWidth: double.infinity,
+                    elevation: 10,
+                    padding: const EdgeInsets.all(15),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Text(
+                      "Sign in with Google",
+                      style: TextStyle(
+                          color: primary,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -58,4 +150,32 @@ class LoginPage extends StatelessWidget {
       ),
     ));
   }
+}
+
+Container InputText(String label, [bool password = false]) {
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 10),
+    child: TextFormField(
+      style: const TextStyle(fontSize: 15),
+      obscureText: password,
+      obscuringCharacter: '*',
+      decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(15),
+          labelText: label,
+          labelStyle: const TextStyle(fontSize: 13),
+          floatingLabelStyle:
+              const TextStyle(color: Color.fromRGBO(31, 65, 187, 1)),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(
+              width: 0,
+              style: BorderStyle.none,
+            ),
+          ),
+          fillColor: const Color.fromRGBO(241, 244, 255, 1),
+          filled: true,
+          focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Color.fromRGBO(31, 65, 187, 1)))),
+    ),
+  );
 }
