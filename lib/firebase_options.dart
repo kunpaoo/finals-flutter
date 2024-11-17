@@ -72,6 +72,7 @@ class DefaultFirebaseOptions {
     projectId: 't2024cs3-univents',
     databaseURL: 'https://t2024cs3-univents-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 't2024cs3-univents.firebasestorage.app',
+    androidClientId: '942814661449-re2r0fersqgekvha2484hd7aa0kmoqnq.apps.googleusercontent.com',
     iosClientId: '942814661449-nie5cv9trnqfimkqs5jsd01budeen7la.apps.googleusercontent.com',
     iosBundleId: 'com.example.univents',
   );

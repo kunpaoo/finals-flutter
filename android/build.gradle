@@ -1,18 +1,17 @@
 buildscript {
     repositories {
-        google()  // Make sure Google repository is included
-        mavenCentral()  // Also include Maven Central
+        google()  
+        mavenCentral()  
     }
     dependencies {
-        // Correctly place the classpath inside the buildscript block
-        classpath 'com.google.gms:google-services:4.3.15'  // Make sure the version is correct
+        classpath 'com.google.gms:google-services:4.3.15'  
     }
 }
 
 allprojects {
     repositories {
-        google()  // Google repository
-        mavenCentral()  // Maven Central repository
+        google()  
+        mavenCentral() 
     }
 }
 

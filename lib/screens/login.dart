@@ -28,6 +28,27 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  void _handleAnonymousSignIn() async{
+    try {
+      final userCredential =
+      await FirebaseAuth.instance.signInAnonymously();
+      Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => const Dashboard(),
+      ),
+    );
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case "operation-not-allowed":
+          print("Anonymous auth hasn't been enabled for this project.");
+          break;
+        default:
+          print("Unknown error.");
+      }
+    }
+  }
+
   void _handleGoogleSignIn() async {
   try {
     GoogleAuthProvider googleAuthProvider = GoogleAuthProvider();
@@ -124,12 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 20),
                     MaterialButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => const Dashboard(),
-                          ),
-                        );
+                        _handleAnonymousSignIn();
                       },
                       color: primary,
                       minWidth: double.infinity,
