@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "942814661449",
+    "firebase_url": "https://t2024cs3-univents-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "t2024cs3-univents",
+    "storage_bucket": "t2024cs3-univents.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942814661449:android:278eaba064e5f47ad32898",
+        "android_client_info": {
+          "package_name": "com.finals.flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942814661449-oe9b6j76vppj4gguv0oi2omu8sd494qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU1EPqoxyC6ixlWuabrLfAAYTWyrEyvE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942814661449-oe9b6j76vppj4gguv0oi2omu8sd494qk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
