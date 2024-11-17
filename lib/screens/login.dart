@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:univents/screens/dashboard.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,6 +13,41 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _auth.authStateChanges().listen((event){
+      setState((){
+        _user = event;
+      });
+    });
+  }
+
+  void _handleGoogleSignIn() async {
+  try {
+    GoogleAuthProvider googleAuthProvider = GoogleAuthProvider();
+        UserCredential userCredential = await _auth.signInWithProvider(googleAuthProvider);
+    
+    if (userCredential.user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const Dashboard(),
+        ),
+      );
+    }
+  } catch (error) {
+    print("Error during Google Sign-In: $error");
+  }
+}
+
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -131,12 +167,8 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 10),
                     MaterialButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const Dashboard(),
-                          ),
-                        );
+                        _handleGoogleSignIn();
+                        
                       },
                       color: Colors.white,
                       minWidth: double.infinity,
@@ -165,6 +197,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
+Widget _userInfo(){
+    return SizedBox();
+  }
+
+
+
+
 Container InputText(String label, [bool password = false]) {
   return Container(
     margin: const EdgeInsets.symmetric(vertical: 10),
@@ -192,4 +231,6 @@ Container InputText(String label, [bool password = false]) {
       ),
     ),
   );
+  
+
 }

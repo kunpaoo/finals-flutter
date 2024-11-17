@@ -1,14 +1,27 @@
+buildscript {
+    repositories {
+        google()  // Make sure Google repository is included
+        mavenCentral()  // Also include Maven Central
+    }
+    dependencies {
+        // Correctly place the classpath inside the buildscript block
+        classpath 'com.google.gms:google-services:4.3.15'  // Make sure the version is correct
+    }
+}
+
 allprojects {
     repositories {
-        google()
-        mavenCentral()
+        google()  // Google repository
+        mavenCentral()  // Maven Central repository
     }
 }
 
 rootProject.buildDir = "../build"
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }
@@ -16,3 +29,5 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+
+// Apply the plugin at the bottom of the file (inside app-level gradle)

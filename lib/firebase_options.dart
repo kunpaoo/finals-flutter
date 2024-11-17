@@ -75,4 +75,5 @@ class DefaultFirebaseOptions {
     iosClientId: '942814661449-nie5cv9trnqfimkqs5jsd01budeen7la.apps.googleusercontent.com',
     iosBundleId: 'com.example.univents',
   );
+
 }
