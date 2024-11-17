@@ -5,6 +5,19 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    print("im here");
+    return const Scaffold(
+    backgroundColor: Colors.white, 
+    body: Center(
+      child: const Text(
+        "You're logged in",
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.black, 
+        ),
+      ),
+    ),
+  );
   }
 }

@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "942814661449",
+    "firebase_url": "https://t2024cs3-univents-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "t2024cs3-univents",
+    "storage_bucket": "t2024cs3-univents.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942814661449:android:04f05bcd5a5fa12bd32898",
+        "android_client_info": {
+          "package_name": "com.example.univents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942814661449-re2r0fersqgekvha2484hd7aa0kmoqnq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.univents",
+            "certificate_hash": "1166b7aa983fa6f3e0715a743fe864e246c50f47"
+          }
+        },
+        {
+          "client_id": "942814661449-oe9b6j76vppj4gguv0oi2omu8sd494qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU1EPqoxyC6ixlWuabrLfAAYTWyrEyvE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942814661449-oe9b6j76vppj4gguv0oi2omu8sd494qk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "942814661449-nie5cv9trnqfimkqs5jsd01budeen7la.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.univents"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942814661449:android:278eaba064e5f47ad32898",
+        "android_client_info": {
+          "package_name": "com.finals.flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942814661449-oe9b6j76vppj4gguv0oi2omu8sd494qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU1EPqoxyC6ixlWuabrLfAAYTWyrEyvE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942814661449-oe9b6j76vppj4gguv0oi2omu8sd494qk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "942814661449-nie5cv9trnqfimkqs5jsd01budeen7la.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.univents"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
