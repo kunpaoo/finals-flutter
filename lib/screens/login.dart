@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (BuildContext context) => const Dashboard(),
+          builder: (BuildContext context) => Dashboard(),
         ),
       );
     } on FirebaseAuthException catch (e) {
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute<void>(
-            builder: (BuildContext context) => const Dashboard(),
+            builder: (BuildContext context) => Dashboard(),
           ),
         );
       }
@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 40),
                       InputText("Email"),
                       InputText("Password", true),
-                      SizedBox(
+                      const SizedBox(
                         width: double.infinity,
                         child: const Text(
                           "Forgot your Password?",
