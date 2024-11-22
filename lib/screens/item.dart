@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Required for Timestamp
+import 'package:cloud_firestore/cloud_firestore.dart'; 
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class Item extends StatelessWidget {
   final Map<String, dynamic> item;
@@ -114,9 +116,14 @@ class Item extends StatelessWidget {
             ),
             ListTile(
               title: const Text('Logout'),
-              onTap: () {
-                Navigator.pop(context);
-              },
+              onTap: () async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacementNamed(context, '/');
+    } catch (e) {
+      print('Error logging out: $e');
+    }
+  },
             ),
           ],
         ),

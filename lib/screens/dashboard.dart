@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class Dashboard extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -77,9 +79,15 @@ class Dashboard extends StatelessWidget {
             ),
             ListTile(
               title: const Text('Logout'),
-              onTap: () {
-                Navigator.pop(context);
-              },
+              onTap: () async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacementNamed(context, '/');
+    } catch (e) {
+      print('Error logging out: $e');
+    }
+  },
+
             ),
           ],
         ),
