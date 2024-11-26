@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:univents/screens/dashboard.dart';
 import 'package:univents/screens/login.dart';
 import 'package:univents/screens/item.dart';
+import 'package:univents/screens/chat.dart';
 import 'firebase_options.dart'; 
 
 void main() async {
@@ -23,6 +24,7 @@ class MainApp extends StatelessWidget {
       routes: {
         '/': (context) => const LoginPage(),
         '/home': (context) => Dashboard(),
+        '/chat': (context) => Chat(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/item') {
