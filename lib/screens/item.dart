@@ -67,26 +67,14 @@ class Item extends StatelessWidget {
                 fontSize: 20),
           ),
         ),
-        leading: Builder(builder: (context) {
-          return Container(
-            margin: const EdgeInsets.only(left: 10),
-            padding: const EdgeInsets.all(5),
-            child: IconButton(
-              icon: Icon(Icons.menu, color: Colors.white),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            ),
-          );
-        }),
         actions: [
-      IconButton(
-        icon: const Icon(Icons.chat, color: Colors.white),
-        onPressed: () {
-            Navigator.pushNamed(context, '/chat');
-        },
-      ),
-    ],
+          IconButton(
+            icon: const Icon(Icons.chat),
+            onPressed: () {
+              Navigator.pushNamed(context, '/chat');
+            },
+          ),
+        ],
         backgroundColor: Colors.white,
       ),
       drawer: Drawer(
@@ -216,15 +204,76 @@ class Item extends StatelessWidget {
                           color: const Color.fromARGB(255, 97, 97, 97)),
                     ),
                     const SizedBox(height: 30),
-                    dateBlock(
-                        primary,
-                        DateFormat("MMMM dd yyyy")
-                            .format(item["date"].toDate()),
-                        Icons.date_range_rounded),
-                    dateBlock(
-                        primary,
-                        DateFormat("hh:mm a").format(item["date"].toDate()),
-                        Icons.access_time),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: primary)),
+                      clipBehavior: Clip.hardEdge,
+                      height: 80,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(color: primary),
+                              child: Icon(
+                                Icons.date_range_rounded,
+                                color: Colors.white,
+                              )),
+                          Container(
+                            padding: EdgeInsets.only(right: 40),
+                            child: Text(
+                              DateFormat("MMMM dd yyyy")
+                                  .format(item["date"].toDate()),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color.fromARGB(255, 53, 53, 53)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: primary)),
+                      clipBehavior: Clip.hardEdge,
+                      height: 80,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(left: 40),
+                            child: Text(
+                              DateFormat("hh:mm a")
+                                  .format(item["date"].toDate()),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color.fromARGB(255, 53, 53, 53)),
+                            ),
+                          ),
+                          Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(color: primary),
+                              child: Icon(
+                                Icons.access_time,
+                                color: Colors.white,
+                              )),
+                        ],
+                      ),
+                    ),
                     SizedBox(height: 15),
                   ],
                 ),
