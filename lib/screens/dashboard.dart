@@ -288,6 +288,7 @@ class _DashboardState extends State<Dashboard> {
 
   AppBar Header() {
     return AppBar(
+      centerTitle: true,
       title: const Padding(
         padding: EdgeInsets.only(left: 8.0),
         child: Text(

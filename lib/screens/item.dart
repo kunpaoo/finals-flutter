@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class Item extends StatelessWidget {
   final Map<String, dynamic> item;
@@ -57,27 +56,18 @@ class Item extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Padding(
           padding: EdgeInsets.only(left: 8.0),
           child: Text(
-            'UNIVENTS',
+            'Event Detail',
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                color: Color.fromARGB(221, 85, 85, 85),
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
           ),
         ),
-        leading: Builder(builder: (context) {
-          return Container(
-            margin: const EdgeInsets.only(left: 10),
-            padding: const EdgeInsets.all(5),
-            child: IconButton(
-              icon: Icon(Icons.menu, color: Colors.white),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            ),
-          );
-        }),
-        backgroundColor: const Color.fromARGB(255, 8, 100, 175),
+        backgroundColor: Colors.white,
       ),
       drawer: Drawer(
         child: ListView(
@@ -117,88 +107,148 @@ class Item extends StatelessWidget {
             ListTile(
               title: const Text('Logout'),
               onTap: () async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      Navigator.pushReplacementNamed(context, '/');
-    } catch (e) {
-      print('Error logging out: $e');
-    }
-  },
+                try {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.pushReplacementNamed(context, '/');
+                } catch (e) {
+                  print('Error logging out: $e');
+                }
+              },
             ),
           ],
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(color: Colors.white),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CarouselSlider(
-              options: CarouselOptions(
-                height: 400,
-                autoPlay: true,
-                aspectRatio: 16 / 9,
-                viewportFraction: 0.8,
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(color: Colors.white),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CarouselSlider(
+                options: CarouselOptions(
+                  height: 300,
+                  autoPlay: true,
+                  aspectRatio: 9 / 16,
+                  viewportFraction: 0.9,
+                ),
+                items: imageUrls.map((url) {
+                  return Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                    margin: const EdgeInsets.all(8.0),
+                    child: Image.network(
+                      url,
+                      width: MediaQuery.of(context).size.width,
+                      height: 250,
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                }).toList(),
               ),
-              items: imageUrls.map((url) {
-                return Image.network(
-                  url,
-                  width: MediaQuery.of(context).size.width,
-                  height: 250,
-                  fit: BoxFit.cover,
-                );
-              }).toList(),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-              width: MediaQuery.sizeOf(context).width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    formattedDate,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    '${item['name'] ?? 'No Name'}',
-                    style: TextStyle(
-                        fontSize: 33,
-                        fontWeight: FontWeight.bold,
-                        color: primary,
-                        height: 1.1),
-                    textAlign: TextAlign.start,
-                  ),
-                  SizedBox(height: 15),
-                  Text(
-                    '${item['description'] ?? 'No Description'}',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_on,
-                        color: primary,
-                      ),
-                      SizedBox(width: 10),
-                      Flexible(
-                        child: Text(
-                          '${item['location'] ?? 'No Location'}',
-                          softWrap: true,
-                          overflow: TextOverflow.visible,
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+                width: MediaQuery.sizeOf(context).width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${item['name'] ?? 'No Name'}',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: primary,
+                          height: 1.1),
+                      textAlign: TextAlign.start,
+                    ),
+                    SizedBox(height: 7),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          color: Colors.blueGrey,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                ],
+                        SizedBox(width: 8),
+                        Flexible(
+                          child: Text(
+                            '${item['location'] ?? 'No Location'}',
+                            softWrap: true,
+                            overflow: TextOverflow.visible,
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.blueGrey),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'Description',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: 18),
+                    Text(
+                      '${item['description'] ?? 'No Description'}',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: const Color.fromARGB(255, 97, 97, 97)),
+                    ),
+                    const SizedBox(height: 30),
+                    dateBlock(
+                        primary,
+                        DateFormat("MMMM dd yyyy")
+                            .format(item["date"].toDate()),
+                        Icons.date_range_rounded),
+                    dateBlock(
+                        primary,
+                        DateFormat("hh:mm a").format(item["date"].toDate()),
+                        Icons.access_time),
+                    SizedBox(height: 15),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Container dateBlock(Color primary, String text, IconData icon) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: primary)),
+      clipBehavior: Clip.hardEdge,
+      height: 80,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+              height: 80,
+              width: 80,
+              decoration: BoxDecoration(color: primary),
+              child: Icon(
+                icon,
+                color: Colors.white,
+              )),
+          Container(
+            padding: EdgeInsets.only(right: 40),
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  color: const Color.fromARGB(255, 53, 53, 53)),
+            ),
+          ),
+        ],
       ),
     );
   }
