@@ -120,57 +120,42 @@ class _DashboardState extends State<Dashboard> {
                 onSubmitted: (value) => handleSearch(value.toLowerCase()),
               ),
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Container(
-                margin: EdgeInsets.only(right: 10),
-                child: DropdownButton<String>(
-                    dropdownColor: const Color.fromARGB(255, 240, 250, 255),
-                    borderRadius: BorderRadius.circular(8),
-                    hint: Text('Year'),
-                    value: _selectedItem,
-                    items: _dropdownItems.map((String item) {
-                      return DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(item),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedItem = value;
-                        _listFiltered =
-                            _listFuture?.then((list) => list.where((item) {
-                                  DateTime selectedDate = DateFormat("yyyy")
-                                      .parse(value.toString());
-                                  DateTime itemDate = item["date"].toDate();
-                                  return selectedDate.year == itemDate.year;
-                                }).toList());
-                        _listVisible =
-                            getCommonEntries(_listFiltered, _listSearch);
-                      });
-                    }),
-              ),
-            ]),
-            if (_isSearchFocused)
-              StreamBuilder<List<String>>(
-                stream: _searchHistoryService.getSearchHistory(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return CircularProgressIndicator();
-                  }
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(snapshot.data![index]),
-                        onTap: () {
-                          _searchController.text = snapshot.data![index];
-                        },
-                      );
-                    },
-                  );
-                },
-              ),
+            Stack(
+              fit: StackFit.loose,
+              children: [
+                if (_isSearchFocused) searchHistory(),
+                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: DropdownButton<String>(
+                        dropdownColor: const Color.fromARGB(255, 240, 250, 255),
+                        borderRadius: BorderRadius.circular(8),
+                        hint: Text('Year'),
+                        value: _selectedItem,
+                        items: _dropdownItems.map((String item) {
+                          return DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(item),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedItem = value;
+                            _listFiltered =
+                                _listFuture?.then((list) => list.where((item) {
+                                      DateTime selectedDate = DateFormat("yyyy")
+                                          .parse(value.toString());
+                                      DateTime itemDate = item["date"].toDate();
+                                      return selectedDate.year == itemDate.year;
+                                    }).toList());
+                            _listVisible =
+                                getCommonEntries(_listFiltered, _listSearch);
+                          });
+                        }),
+                  ),
+                ]),
+              ],
+            ),
             FutureBuilder<List<Map<String, dynamic>>>(
               future: _listVisible,
               builder: (context, snapshot) {
@@ -273,6 +258,30 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
+  StreamBuilder<List<String>> searchHistory() {
+    return StreamBuilder<List<String>>(
+      stream: _searchHistoryService.getSearchHistory(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return CircularProgressIndicator();
+        }
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: snapshot.data!.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(snapshot.data![index]),
+              tileColor: Colors.white,
+              onTap: () {
+                _searchController.text = snapshot.data![index];
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
   Container eventHeader(String name) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
@@ -364,13 +373,13 @@ class _DashboardState extends State<Dashboard> {
         );
       }),
       actions: [
-      IconButton(
-        icon: const Icon(Icons.chat, color: Colors.white),
-        onPressed: () {
+        IconButton(
+          icon: const Icon(Icons.chat, color: Colors.white),
+          onPressed: () {
             Navigator.pushNamed(context, '/chat');
-        },
-      ),
-    ],
+          },
+        ),
+      ],
       backgroundColor: const Color.fromARGB(255, 8, 100, 175),
     );
   }
