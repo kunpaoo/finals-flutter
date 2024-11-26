@@ -67,6 +67,26 @@ class Item extends StatelessWidget {
                 fontSize: 20),
           ),
         ),
+        leading: Builder(builder: (context) {
+          return Container(
+            margin: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.all(5),
+            child: IconButton(
+              icon: Icon(Icons.menu, color: Colors.white),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
+          );
+        }),
+        actions: [
+      IconButton(
+        icon: const Icon(Icons.chat, color: Colors.white),
+        onPressed: () {
+            Navigator.pushNamed(context, '/chat');
+        },
+      ),
+    ],
         backgroundColor: Colors.white,
       ),
       drawer: Drawer(
