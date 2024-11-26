@@ -77,6 +77,14 @@ class Item extends StatelessWidget {
             ),
           );
         }),
+        actions: [
+      IconButton(
+        icon: const Icon(Icons.chat, color: Colors.white),
+        onPressed: () {
+            Navigator.pushNamed(context, '/chat');
+        },
+      ),
+    ],
         backgroundColor: const Color.fromARGB(255, 8, 100, 175),
       ),
       drawer: Drawer(

@@ -280,7 +280,7 @@ class _DashboardState extends State<Dashboard> {
                 print('Error logging out: $e');
               }
             },
-          ),
+          )
         ],
       ),
     );
@@ -308,6 +308,14 @@ class _DashboardState extends State<Dashboard> {
           ),
         );
       }),
+      actions: [
+      IconButton(
+        icon: const Icon(Icons.chat, color: Colors.white),
+        onPressed: () {
+            Navigator.pushNamed(context, '/chat');
+        },
+      ),
+    ],
       backgroundColor: const Color.fromARGB(255, 8, 100, 175),
     );
   }
