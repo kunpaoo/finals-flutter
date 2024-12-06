@@ -78,6 +78,7 @@ class Item extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       drawer: Drawer(
+        backgroundColor: const Color.fromARGB(255, 237, 240, 253),
         child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,

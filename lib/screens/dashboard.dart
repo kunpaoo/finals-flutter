@@ -306,6 +306,7 @@ class _DashboardState extends State<Dashboard> {
 
   Drawer menu(BuildContext context) {
     return Drawer(
+      backgroundColor: const Color.fromRGBO(241, 244, 255, 1),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
