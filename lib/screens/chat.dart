@@ -27,6 +27,8 @@ class _ChatState extends State<Chat> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Chat"),
+        centerTitle: true,
+        backgroundColor: const Color.fromRGBO(241, 244, 255, 1),
       ),
       body: Column(
         children: [
@@ -49,7 +51,8 @@ class _ChatState extends State<Chat> {
                   itemBuilder: (ctx, index) {
                     return ListTile(
                       title: Text(chatDocs[index]['message']),
-                      subtitle: Text('Sent at: ${chatDocs[index]['timestamp']?.toDate().toString() ?? 'Unknown'}'),
+                      subtitle: Text(
+                          'Sent at: ${chatDocs[index]['timestamp']?.toDate().toString() ?? 'Unknown'}'),
                     );
                   },
                 );
